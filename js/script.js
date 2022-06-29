@@ -7,10 +7,12 @@ let messageText = document.querySelector("#message p");
 let secondPlayer;
 
 //  Contador de jogadas
+
 let player1 = 0;
 let player2 = 0;
 
 // Adicionando evento de click aos boxes
+
 for (let i = 0; i < boxes.length; i++) {
     //add evento ao clicar na caixa
     boxes[i].addEventListener("click", function () {
@@ -186,7 +188,7 @@ function checkWinCondition() {
             counter++;
         }
         if (counter == 9) {
-            console.log("Deu velha!");
+            declareWinner("Deu velha");
         }
     }
 }
@@ -206,8 +208,21 @@ function declareWinner(winner) {
     } else {
         msg = "Deu velha!";
     }
+
+    //Exibe msg
+    messageText.innerHTML = msg;
+    messageContainer.classList.remove("hide");
+
+    //Esconde msg
+    setTimeout(function () {
+        messageContainer.classList.add("hide");
+    }, 3000);
+
+    //Resetando o game
+    let boxesToRemove = document.querySelectorAll(".box div");
+
+    for (let i = 0; i < boxesToRemove.length; i++) {
+        boxesToRemove[i].parentNode.removeChild(boxesToRemove[i]);
+    }
 }
 
-//Exibe msg
-messageText.innerHTML = msg;
-messageContainer.classList.remove("hide");
